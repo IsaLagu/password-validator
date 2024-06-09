@@ -1,6 +1,6 @@
 //Iteración 1 - Validación de contraseña básica
 import { expect, test, describe } from "vitest";
-import { checkValidPassword, isValidPassword } from "./password";
+import { isValidPassword, checkPassword, checkValidPassword } from "./password";
 
 describe("isValidPassword", () => {
   test("should return true if password is valid", () => {
@@ -16,19 +16,44 @@ describe("isValidPassword", () => {
   });
 });
 
-describe("checkValidPassword", () => {
+describe("checkPassword", () => {
   test("should return 'Your password is correct' if password is valid", () => {
-    expect(checkValidPassword("mariOneta87")).toBe("Your password is correct");
+    expect(checkPassword("mariOneta87")).toBe("Your password is correct");
   });
 
   test("should return error strings if password is not valid", () => {
-    expect(checkValidPassword("Maria2")).toBe("The password is not greater than 8 characters");
-    expect(checkValidPassword("MARIPOSA1")).toBe("The password must contain at least one lowercase letter");
-    expect(checkValidPassword("cuadrado2")).toBe("The password must contain at least one uppercase letter");
-    expect(checkValidPassword("Pastanaga")).toBe("The password must contain at least one number");
-    expect(checkValidPassword("cosmoUniverso-+2")).toBe("The password must be alphanumeric");
-    expect(checkValidPassword("cosmo")).toBe(
+    expect(checkPassword("Maria2")).toBe("The password is not greater than 8 characters");
+    expect(checkPassword("MARIPOSA1")).toBe("The password must contain at least one lowercase letter");
+    expect(checkPassword("cuadrado2")).toBe("The password must contain at least one uppercase letter");
+    expect(checkPassword("Pastanaga")).toBe("The password must contain at least one number");
+    expect(checkPassword("cosmoUniverso-+2")).toBe("The password must be alphanumeric");
+    expect(checkPassword("cosmo")).toBe(
       "The password is not greater than 8 characters\nThe password must contain at least one uppercase letter\nThe password must contain at least one number"
+    );
+  });
+});
+
+describe("checkValidPassword", () => {
+  test("should return 'Your password is correct' if password is valid", () => {
+    expect(checkValidPassword("mariOneta87")).toBe("Your password is correct");
+    expect(checkValidPassword("mariOneta")).toBe("Your password is correct");
+    expect(checkValidPassword("marioneta87")).toBe("Your password is correct");
+    expect(checkValidPassword("MARIONETA87")).toBe("Your password is correct");
+    expect(checkValidPassword("MArIA87")).toBe("Your password is correct");
+  });
+
+  test("should return error strings if password is not valid", () => {
+    expect(checkValidPassword("Maria")).toBe(
+      "The password must be greater than 8 characters, must contain at least one uppercase letter, one lowercase letter, one number and must be alphanumeric"
+    );
+    expect(checkValidPassword("MARIPOSA")).toBe(
+      "The password must be greater than 8 characters, must contain at least one uppercase letter, one lowercase letter, one number and must be alphanumeric"
+    );
+    expect(checkValidPassword("cuadrado")).toBe(
+      "The password must be greater than 8 characters, must contain at least one uppercase letter, one lowercase letter, one number and must be alphanumeric"
+    );
+    expect(checkValidPassword("universo-+2")).toBe(
+      "The password must be greater than 8 characters, must contain at least one uppercase letter, one lowercase letter, one number and must be alphanumeric"
     );
   });
 });
