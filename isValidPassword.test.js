@@ -1,6 +1,6 @@
 //Iteración 1 - Validación de contraseña básica
 import { expect, test, describe } from "vitest";
-import { isValidPassword, checkPassword, checkValidPassword } from "./isValidPassword";
+import { isValidPassword } from "./isValidPassword";
 
 describe("isValidPassword", () => {
   test("should return true if password is valid", () => {

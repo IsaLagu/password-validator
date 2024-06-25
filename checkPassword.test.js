@@ -1,3 +1,6 @@
+import { expect, test, describe } from "vitest";
+import { checkPassword } from "./isValidPassword";
+
 describe("checkPassword", () => {
   test("should return 'Your password is correct' if password is valid", () => {
     expect(checkPassword("mariOneta87")).toBe("Your password is correct");
